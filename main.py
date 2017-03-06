@@ -63,7 +63,3 @@ def close_connection(exception):
         db.close()
 
 app.run()
-
-with app.app_context():
-    get_db().execute("create table USER (id INT IDENTITY, firstname varchar(25), lastname varchar(30),"
-    "constraint pk_id_constraint PRIMARY KEY(id));")
