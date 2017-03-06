@@ -65,4 +65,4 @@ def close_connection(exception):
     if db is not None:
         db.close()
 
-app.run()
+app.run(host='0.0.0.0')
