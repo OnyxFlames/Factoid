@@ -1,5 +1,3 @@
-console.log("index.js loaded fine.");
-
 var timestampLabel = document.getElementById("timestamp");
 
 function updateTime() 
