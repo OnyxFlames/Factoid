@@ -1,7 +1,10 @@
-from flask import Flask, request, render_template
+from flask import *
+#from flask import Flask, request, render_template
+from flask_login import *
+
+import auxlib
 
 import sqlite3
-from flask import g
 
 app = Flask(__name__)
 
@@ -37,7 +40,7 @@ def adduser():
 
 @app.errorhandler(404)
 def pagenotfound(err):
-    return render_template("not_found.html"), 404
+    return render_template("not_found.html", phrase=auxlib.getRandomPhrase()), 404
 
 # Database stuff
 

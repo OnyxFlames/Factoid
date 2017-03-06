@@ -5,12 +5,12 @@
         <title>Page Not Found</title>
         <meta content="width=device-width, initial-scale=1" name="viewport">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/timestamp.css')}}">
-        <style>h1 { color: #FF0000; }</style>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/404.css')}}">
     </head>
     <body>
         <h1>404</h1>
         <p>
-            Yikes! That page doesn't exist.
+           <code>{{ phrase }}</code>
         </p>
         <label id="timestamp"></label>
     </body>

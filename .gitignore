@@ -2,3 +2,5 @@
 images/*
 # We aren't uploading the database. Nice try ;)
 database/*
+# Silly Python
+__pycache__/*
