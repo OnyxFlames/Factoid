@@ -2,13 +2,21 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Factoid!</title>
+        {% if name %}
+        <title>Factoid! Player {{ name }}</title>
+        {% else %}
+        <title>Factoid! Players</title>
+        {% endif %}
         <meta content="width=device-width, initial-scale=1" name="viewport">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/timestamp.css')}}">
     </head>
     <body>
+        {% if name %}
         <h1>This would be <em>{{ name }}'s</em> Profile</h1>
         <h2>But we aren't that far now are we?</h2>
+        {% else %}
+        <p>Once players are added, this page will contain the list of players who are active Factoid! users.</p>
+        {% endif %}
         <label id="timestamp"></label>
     </body>
     <script src="{{ url_for('static', filename='scripts/timestamp.js')}}"></script>
