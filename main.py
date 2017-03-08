@@ -13,10 +13,13 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+#   TODO:
+#   Actually verify if user is an admin
+#   Add commands to admin page: createdb, ban user, disable signup, delete user, etc
 @app.route('/admin/')
 @app.route('/admin.html')
-def admin():
-    return render_template('admin.html')
+def admin(is_admin=False):
+    return render_template('admin.html', is_admin=is_admin)
 
 @app.route('/signup/')
 @app.route('/signup.html')
@@ -49,7 +52,7 @@ def createdb():
     with app.app_context():
         get_db().execute("create table if not exists USER (id INT IDENTITY, firstname varchar(25),"
                          " lastname varchar(30), constraint pk_id_constraint PRIMARY KEY(id));")
-    return "<h1>Admin Control Panel</h1>"
+    return "Created database!<script>window.location.replace(\"/admin\")</script>"
 
 DATABASE = 'database/datebase.db'
 

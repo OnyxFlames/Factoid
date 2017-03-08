@@ -2,14 +2,27 @@
 <html>
     <head>
         <meta charset="utf-8">
+        {% if not is_admin %}
+        <title>Restricted Access</title>
+        {% else %}
         <title>Admin Controls</title>
+        {% endif %}
         <meta content="width=device-width, initial-scale=1" name="viewport">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/timestamp.css')}}">
     </head>
     <body>
+         {% if not is_admin %}
         <p>
-            Either you don't have permissions, or this isn't set up yet!
+            You don't have the permissions to view this page!
         </p>
+        {% else %}
+        <ul>
+        <li><a href="{{ url_for('createdb') }}">Create initial database</a></li>
+        <li>Delete user</li>
+        <li>Ban User</li>
+        <li>Disable Signup</li>
+        </ul>
+        {% endif %}
         <label id="timestamp"></label>
     </body>
     <script src="{{ url_for('static', filename='scripts/timestamp.js')}}"></script>
