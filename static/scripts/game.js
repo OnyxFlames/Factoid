@@ -11,7 +11,7 @@
 function Game(val){
     this.curr = val;
     
-    //this.curr = 0;
+    // TODO: Add some proper questions.
     this.questions = ["test1", "test2", "test3", "test4"];
     this.answers = [true, false, true, false];
     // 'weight' of the question. The higher the 'weight' the more likely it is to big the question.
