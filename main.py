@@ -80,4 +80,5 @@ def close_connection(exception):
     if db is not None:
         db.close()
 
-app.run(host='0.0.0.0')
+app.run()
+#app.run(host='0.0.0.0') Don't wanna make the server public right now.
