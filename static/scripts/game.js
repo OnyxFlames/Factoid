@@ -29,6 +29,7 @@ function Game(val){
     }
     this.getCurrQuestion = function() { return this.questions[this.curr]; }
     this.getCurrAnswer = function() { return this.answers[this.curr]; }
+    this.getCurrWeight = function() { return this.weight[curr];}
     this.correct = function() { this.weight[this.curr] -= 2;  this.updateCurr(); }
     this.incorrect = function() { this.weight[this.curr] += 2; this.updateCurr(); }
     // TODO: Add weighted randomization for heavier 'weighted' questions.
