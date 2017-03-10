@@ -7,6 +7,11 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/timestamp.css')}}">
     </head>
     <body>
+    <form method="POST" action="{{ url_for('signupreturn') }}">
+        <input type="text" name="name" placeholder="Test: Please enter a name or whatever">
+        <input type="submit">
+    </form>
+
         <p>
             This project is still in its infancy. Signuping is not yet available.
             Although, if you want to play, you can go <a href="/play.html">here</a> to play!<br>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Hey You!</title>
+        <meta content="width=device-width, initial-scale=1" name="viewport">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/timestamp.css')}}">
+    </head>
+    <body>
+    {% if name %}
+    Data returned: {{ name }}
+    {% endif %}
+        <label id="timestamp"></label>
+    </body>
+    <script src="{{ url_for('static', filename='scripts/timestamp.js')}}"></script>
+</html>

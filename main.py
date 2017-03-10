@@ -37,10 +37,14 @@ def user(name=None):
     return render_template("user.html", name=name)
 
 @app.route('/test/signup/')
-@app.route('/test/signup.html')
+@app.route('/test/signup.html', methods=['POST', 'GET'])
 def adduser():
     return render_template("test-signup.html")
 
+@app.route('/test/signup-success/', methods=['POST', 'GET'])
+def signupreturn():
+    return render_template("test-signup-success.html", name=request.form['name'])
+    
 @app.errorhandler(404)
 def pagenotfound(err):
     return render_template("not_found.html", phrase=auxlib.getRandomPhrase()), 404
