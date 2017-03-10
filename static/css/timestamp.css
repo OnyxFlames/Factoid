@@ -1,4 +1,5 @@
-label {
+label[name=timestamp]{
+    display: block;
     background-color: #000000;
     color: #FFFFFF;
 }

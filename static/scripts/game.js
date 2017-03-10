@@ -40,7 +40,7 @@ function Game(val){
 
 var inst = new Game(3);
 
-var gamequestionlabel = document.getElementById('gamequestion');
+var gamequestionlabel = document.getElementById('gamecard');
 
 gamequestionlabel.innerText = inst.getCurrQuestion();
 

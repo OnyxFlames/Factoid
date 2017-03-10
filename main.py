@@ -8,6 +8,7 @@ import sqlite3
 # My stuff
 import auxlib
 
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -61,10 +62,11 @@ def demogame():
 
 @app.route('/admin/createdb/')
 def createdb():
-    with app.app_context():
+     with app.app_context():
         get_db().execute("create table if not exists USER (id INT IDENTITY, firstname varchar(25),"
-                         " lastname varchar(30), constraint pk_id_constraint PRIMARY KEY(id));")
-    return "Created database!<script>window.location.replace(\"/admin\")</script>"
+        " lastname varchar(30), constraint pk_id_constraint PRIMARY KEY(id));")
+        return "Created database!<script>window.location.replace(\"/admin\")</script>"
+
 
 DATABASE = 'database/datebase.db'
 
@@ -79,6 +81,7 @@ def close_connection(exception):
     db = getattr(g, '_database', None)
     if db is not None:
         db.close()
+
 
 app.run()
 #app.run(host='0.0.0.0') Don't wanna make the server public right now.
