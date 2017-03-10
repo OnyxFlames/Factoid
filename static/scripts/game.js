@@ -29,9 +29,12 @@ function Game(val){
     }
     this.getCurrQuestion = function() { return this.questions[this.curr]; }
     this.getCurrAnswer = function() { return this.answers[this.curr]; }
-    this.correct = function() { this.weight[this.curr] -= 2; }
-    this.incorrect = function() { this.weight[this.curr] += 2; }
-
+    this.correct = function() { this.weight[this.curr] -= 2;  this.updateCurr(); }
+    this.incorrect = function() { this.weight[this.curr] += 2; this.updateCurr(); }
+    // TODO: Add weighted randomization for heavier 'weighted' questions.
+    this.updateCurr = function() {
+        this.curr = Math.floor(Math.random() * (this.questions.length - 1));
+    }
 }
 
 var inst = new Game(3);
