@@ -1,10 +1,12 @@
+# TODO: Figure out how to import @app functions in other files.
+
+# Flask stuff
 from flask import *
-#from flask import Flask, request, render_template
 from flask_login import *
-
-import auxlib
-
+# Database stuff
 import sqlite3
+# My stuff
+import auxlib
 
 app = Flask(__name__)
 
@@ -48,6 +50,12 @@ def signupreturn():
 @app.errorhandler(404)
 def pagenotfound(err):
     return render_template("not_found.html", phrase=auxlib.getRandomPhrase()), 404
+
+# Game demo stuff
+
+@app.route('/test/game.html')
+def demogame():
+    return render_template('test-game.html')
 
 # Database stuff
 
