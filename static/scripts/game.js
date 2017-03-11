@@ -1,21 +1,14 @@
-// Game instance
-/*var Game = {
-    curr:       0,
-    questions:  ["test1", "test2", "test3", "test4"],
-    answers:    [true, false, true, false],
-    weight:     [5, 5, 5, 5],
-    getCurr: function() { return Game.curr; },
-    setCurr: function(val) { Game.curr = val; },
-}
-*/
 function Game(val){
     this.curr = val;
-    
     // TODO: Add some proper questions.
-    this.questions = ["test1", "test2", "test3", "test4"];
-    this.answers = [true, false, true, false];
+    this.questions = ["In Javascript, variables are declared with int variable = 0;",
+     "The alert() function is best for printing to the console.",
+     "Functions are useful for when you only have to you use code once.",
+     "Javascript uses the square brackets([ and ]) for accessing an arrays elements.",
+     ];
+    this.answers = [false, false, false, true];
     // 'weight' of the question. The higher the 'weight' the more likely it is to big the question.
-    this.weight = [5, 5, 5, 5];
+    this.weight = [1, 1, 1, 1];
     this.getCurr = function() { return this.curr; }
     this.setCurr = function(val) {  
         if (val >= this.questions.length || val < 0) {
@@ -27,13 +20,23 @@ function Game(val){
             return;
         }
     }
-    this.getCurrQuestion = function() { return this.questions[this.curr]; }
+    this.getCurrQuestion = function() { 
+        if(this.questions.length <= 0)
+            return "You answered all the questions sufficiently!";
+        else
+            return this.questions[this.curr]; 
+    }
     this.getCurrAnswer = function() { return this.answers[this.curr]; }
-    this.getCurrWeight = function() { return this.weight[curr];}
+    this.getCurrWeight = function() { return this.weight[this.curr];}
     this.correct = function() { this.weight[this.curr] -= 2;  this.updateCurr(); }
     this.incorrect = function() { this.weight[this.curr] += 2; this.updateCurr(); }
     // TODO: Add weighted randomization for heavier 'weighted' questions.
     this.updateCurr = function() {
+        if (this.getCurrWeight() <= 0) { 
+            this.questions.splice(this.getCurr(), 1);
+            this.answers.splice(this.getCurr(), 1);
+            this.weight.splice(this.getCurr(), 1);
+        }
         this.curr = Math.floor(Math.random() * (this.questions.length - 1));
     }
 }
@@ -51,6 +54,7 @@ function truebutton_onclick(){
     else {
         inst.incorrect();
     }
+    gamequestionlabel.innerText = inst.getCurrQuestion();
 }
 
 function falsebutton_onclick(){
@@ -60,4 +64,5 @@ function falsebutton_onclick(){
     else {
         inst.incorrect();
     }
+    gamequestionlabel.innerText = inst.getCurrQuestion();
 }
