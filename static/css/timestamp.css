@@ -3,3 +3,9 @@ label[name=timestamp]{
     background-color: #000000;
     color: #FFFFFF;
 }
+
+#warning {
+    color: #FF2222;
+    font-weight: bold;
+    font-family: Consolas;
+}

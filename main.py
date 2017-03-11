@@ -46,8 +46,10 @@ def adduser():
 
 @app.route('/test/signup-success/', methods=['POST', 'GET'])
 def signupreturn():
-    return render_template("test-signup-success.html", name=request.form['name'])
-    
+    pass
+
+    #return render_template("test-signup-success.html", name=request.form['name'])
+
 @app.errorhandler(404)
 def pagenotfound(err):
     return render_template("not_found.html", phrase=auxlib.getRandomPhrase()), 404
@@ -62,9 +64,10 @@ def demogame():
 
 @app.route('/admin/createdb/')
 def createdb():
-     with app.app_context():
-        get_db().execute("create table if not exists USER (id INT IDENTITY, firstname varchar(25),"
-        " lastname varchar(30), constraint pk_id_constraint PRIMARY KEY(id));")
+    with app.app_context():
+        script = open("sql/createtable.sql", "r")
+        get_db().executescript(script.read())
+        script.close()
         return "Created database!<script>window.location.replace(\"/admin\")</script>"
 
 

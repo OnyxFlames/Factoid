@@ -8,15 +8,13 @@
     </head>
     <body>
     <form method="POST" action="{{ url_for('signupreturn') }}">
-        <input type="text" name="name" placeholder="Test: Please enter a name or whatever">
+        <strong>Username:</strong><input type="text" name="name" placeholder="Username"><br>
+        <strong>Password: </strong><input type="password" name="password" placeholder="Password"><br>
+
+        <span id="warning">Warning: This website is not secure, and passwords are stored in plaintext. Please do not enter a password used for anything outside of this website.</span>
+        
         <input type="submit">
     </form>
-
-        <p>
-            This project is still in its infancy. Signuping is not yet available.
-            Although, if you want to play, you can go <a href="/play.html">here</a> to play!<br>
-            <strong>Remember: You cannot save your score</strong>
-        </p>
         <label id="timestamp"></label>
     </body>
     <script src="{{ url_for('static', filename='scripts/timestamp.js')}}"></script>
