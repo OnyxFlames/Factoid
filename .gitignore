@@ -1,6 +1,6 @@
 # Image sources for now
 images/*
 # We aren't uploading the database. Nice try ;)
-database/*
+*.db
 # Silly Python
 __pycache__/*
