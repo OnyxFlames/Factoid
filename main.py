@@ -50,12 +50,7 @@ def user(name=None):
     else:
         return render_template("user.html", name=None)
 
-@app.route('/test/signup/')
-@app.route('/test/signup.html', methods=['GET'])
-def adduser():
-    return render_template("test-signup.html")
-
-@app.route('/test/signup-result/', methods=['POST', 'GET'])
+@app.route('/signup-result/', methods=['POST', 'GET'])
 def signupreturn():
     res = get_db().execute("select firstname from USER where firstname = ?", [request.form['name']])
     # Re-type the result to be the name given by the user.
@@ -74,12 +69,6 @@ def signupreturn():
 @app.errorhandler(404)
 def pagenotfound(err):
     return render_template("not_found.html", phrase=auxlib.getRandomPhrase()), 404
-
-# Game demo stuff
-
-@app.route('/test/game.html')
-def demogame():
-    return render_template('test-game.html')
 
 # Database stuff
 

@@ -4,13 +4,15 @@
         <meta charset="utf-8">
         <title>Factoid!</title>
         <meta content="width=device-width, initial-scale=1" name="viewport">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/timestamp.css')}}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
     </head>
+    <!-- The game demo -->
     <body>
-        <p>
-            You hear a whisper in the distance...<em>"There should be a game here."</em>
-        </p>
-        <label id="timestamp"></label>
+        <div id="gameWrapper">
+          <h3 id="gamecard">Things didn't load properly! :(</h3>
+        </div>
+        <input type="button" id="truebutton" value="True" onclick="truebutton_onclick()">
+        <input type="button" id="falsebutton" value="False" onclick="falsebutton_onclick()">
     </body>
-    <script src="{{ url_for('static', filename='scripts/timestamp.js')}}"></script>
+    <script src="{{ url_for('static', filename='scripts/game.js') }}"></script>
 </html>
