@@ -44,13 +44,21 @@ def user(name=None):
     return render_template("user.html", name=name)
 
 @app.route('/test/signup/')
-@app.route('/test/signup.html', methods=['POST', 'GET'])
+@app.route('/test/signup.html', methods=['GET'])
 def adduser():
     return render_template("test-signup.html")
 
 @app.route('/test/signup-success/', methods=['POST', 'GET'])
 def signupreturn():
-    pass
+    res = get_db().execute("select firstname from USER where firstname = ?", [request.form['name']])
+
+    if res.fetchone():
+        return "User already exists!"
+    else:
+        print("Query returned: ", res.fetchone())
+        get_db().execute("insert into USER values (NULL, ?, ?)", [request.form['name'], request.form['password']])
+        get_db().commit()
+        return "Test if user is added"
 
     #return render_template("test-signup-success.html", name=request.form['name'])
 

@@ -1,1 +1,1 @@
-create table if not exists USER (id INT IDENTITY, firstname varchar(25), password varchar(30), constraint pk_id_constraint PRIMARY KEY(id));
+create table if not exists USER (id INTEGER IDENTITY, firstname TEXT, password TEXT, constraint pk_id_constraint PRIMARY KEY(id));
