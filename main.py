@@ -1,3 +1,7 @@
+# File: main.py
+# Author: Jacob Hicks 
+# GPL 3.0 Licence. See LICENCE for details
+
 # TODO: Figure out how to import @app functions in other files.
 
 # Flask stuff
