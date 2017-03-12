@@ -8,8 +8,8 @@
     </head>
     <body>
     <form method="POST" action="{{ url_for('signupreturn') }}">
-        <strong>Username:</strong><input type="text" name="name" placeholder="Username"><br>
-        <strong>Password: </strong><input type="password" name="password" placeholder="Password"><br>
+        <strong>Username:</strong><input type="text" name="name" placeholder="Username" required="required"><br>
+        <strong>Password: </strong><input type="password" name="password" placeholder="Password" required="required"><br>
 
         <span id="warning">Warning: This website is not secure, and passwords are stored in plaintext. Please do not enter a password used for anything outside of this website.</span>
         

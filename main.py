@@ -9,6 +9,8 @@ from flask import *
 from flask_login import *
 # Database stuff
 import sqlite3
+# stdlib stuff
+import os
 # My stuff
 import auxlib
 
@@ -48,19 +50,21 @@ def user(name=None):
 def adduser():
     return render_template("test-signup.html")
 
-@app.route('/test/signup-success/', methods=['POST', 'GET'])
+@app.route('/test/signup-result/', methods=['POST', 'GET'])
 def signupreturn():
     res = get_db().execute("select firstname from USER where firstname = ?", [request.form['name']])
-
-    if res.fetchone():
+    # Re-type the result to be the name given by the user.
+    res = res.fetchone()
+    # If the user is already in the database
+    if res:
+        print("Returned existing: ", res)
         return "User already exists!"
+    #Otherwise add them, add their password, and thank them :)
     else:
-        print("Query returned: ", res.fetchone())
-        get_db().execute("insert into USER values (NULL, ?, ?)", [request.form['name'], request.form['password']])
+        print("Creating new user: ", request.form['name'])
+        get_db().execute("insert into USER (firstname, password) values (?, ?)", [request.form['name'], request.form['password']])
         get_db().commit()
-        return "Test if user is added"
-
-    #return render_template("test-signup-success.html", name=request.form['name'])
+        return "Thank you for signing up!"
 
 @app.errorhandler(404)
 def pagenotfound(err):
@@ -73,15 +77,6 @@ def demogame():
     return render_template('test-game.html')
 
 # Database stuff
-
-@app.route('/admin/createdb/')
-def createdb():
-    with app.app_context():
-        script = open("sql/createtable.sql", "r")
-        get_db().executescript(script.read())
-        script.close()
-        return "Created database!<script>window.location.replace(\"/admin\")</script>"
-
 
 DATABASE = 'database/datebase.db'
 
@@ -97,6 +92,12 @@ def close_connection(exception):
     if db is not None:
         db.close()
 
+if(not os.path.isfile(DATABASE)):
+    with app.app_context():
+        script = open("sql/createtable.sql", "r")
+        get_db().executescript(script.read())
+        script.close()
+        print("Initial run. Database created at: ", DATABASE)
 
 app.run()
 #app.run(host='0.0.0.0') Don't wanna make the server public right now.
