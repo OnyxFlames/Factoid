@@ -43,13 +43,10 @@ def play():
 #@app.route('/users/')
 @app.route('/users/<name>')
 def user(name=None):
-    res = get_db().execute("select firstname from USER where firstname = ?", [name])
-    res = res.fetchone()
-    # This may become an issue when you're unable to get a plaintext string of a users name.
-    # Returning it from a query returns it as a list with one element in string format.
-    print(name)
+    res = get_db().execute("select * from USER where firstname = ?", [name])
+    res = res.fetchone()[1] # Index one is the username
     if res:
-        return render_template("user.html", name=name)
+        return render_template("user.html", name=res)
     else:
         return render_template("user.html", name=None)
 
