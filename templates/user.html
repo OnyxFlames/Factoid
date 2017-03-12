@@ -5,17 +5,17 @@
         {% if name %}
         <title>Factoid! Player {{ name }}</title>
         {% else %}
-        <title>Factoid! Players</title>
+        <title>PLayer not found!</title>
         {% endif %}
         <meta content="width=device-width, initial-scale=1" name="viewport">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/timestamp.css')}}">
     </head>
     <body>
         {% if name %}
-        <h1>This would be <em>{{ name }}'s</em> Profile</h1>
-        <h2>But we aren't that far now are we?</h2>
+        <h1><em>{{ name }}'s</em> Profile</h1>
+        <h2>{{ name }} exists, but there isn't anything here!</h2>
         {% else %}
-        <p>Once players are added, this page will contain the list of players who are active Factoid! users.</p>
+        <p>That user doesn't exist! :(</p>
         {% endif %}
         <label id="timestamp"></label>
     </body>

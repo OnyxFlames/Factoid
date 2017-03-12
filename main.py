@@ -40,10 +40,18 @@ def signup():
 def play():
     return render_template("play.html")
 
-@app.route('/users/')
+#@app.route('/users/')
 @app.route('/users/<name>')
 def user(name=None):
-    return render_template("user.html", name=name)
+    res = get_db().execute("select firstname from USER where firstname = ?", [name])
+    res = res.fetchone()
+    # This may become an issue when you're unable to get a plaintext string of a users name.
+    # Returning it from a query returns it as a list with one element in string format.
+    print(name)
+    if res:
+        return render_template("user.html", name=name)
+    else:
+        return render_template("user.html", name=None)
 
 @app.route('/test/signup/')
 @app.route('/test/signup.html', methods=['GET'])
@@ -62,7 +70,7 @@ def signupreturn():
     #Otherwise add them, add their password, and thank them :)
     else:
         print("Creating new user: ", request.form['name'])
-        get_db().execute("insert into USER (firstname, password) values (?, ?)", [request.form['name'], request.form['password']])
+        get_db().execute("insert into USER (firstname, password, isadmin) values (?, ?, 0)", [request.form['name'], request.form['password']])
         get_db().commit()
         return "Thank you for signing up!"
 
