@@ -10,21 +10,21 @@ function Game(val){
     // 'weight' of the question. The higher the 'weight' the more likely it is to big the question.
     this.weight = [1, 1, 1, 1];
     this.getCurr = function() { return this.curr; }
-    this.setCurr = function(val) {  
+    this.setCurr = function(val) {
         if (val >= this.questions.length || val < 0) {
             console.log("Error: Attempted to set curr to invalid value.");
-            return; 
+            return;
         }
         else {
             this.curr = val;
             return;
         }
     }
-    this.getCurrQuestion = function() { 
+    this.getCurrQuestion = function() {
         if(this.questions.length <= 0)
             return "You answered all the questions sufficiently!";
         else
-            return this.questions[this.curr]; 
+            return this.questions[this.curr];
     }
     this.getCurrAnswer = function() { return this.answers[this.curr]; }
     this.getCurrWeight = function() { return this.weight[this.curr];}
@@ -32,7 +32,7 @@ function Game(val){
     this.incorrect = function() { this.weight[this.curr] += 2; this.updateCurr(); }
     // TODO: Add weighted randomization for heavier 'weighted' questions.
     this.updateCurr = function() {
-        if (this.getCurrWeight() <= 0) { 
+        if (this.getCurrWeight() <= 0) {
             this.questions.splice(this.getCurr(), 1);
             this.answers.splice(this.getCurr(), 1);
             this.weight.splice(this.getCurr(), 1);
@@ -43,26 +43,17 @@ function Game(val){
 
 var inst = new Game(3);
 
-var gamequestionlabel = document.getElementById('gamecard');
+var gameQuestionLabel = document.getElementById('gamecard');
 
-gamequestionlabel.innerText = inst.getCurrQuestion();
+gameQuestionLabel.innerText = inst.getCurrQuestion();
 
-function truebutton_onclick(){
-    if(inst.getCurrAnswer() === true) {
-        inst.correct();
-    }
-    else {
-        inst.incorrect();
-    }
-    gamequestionlabel.innerText = inst.getCurrQuestion();
-}
-
-function falsebutton_onclick(){
-    if(inst.getCurrAnswer() === false) {
-        inst.correct();
-    }
-    else {
-        inst.incorrect();
-    }
-    gamequestionlabel.innerText = inst.getCurrQuestion();
+function eval(buttonVal) {
+  if(Boolean(buttonVal) === inst.getCurrAnswer()) {
+    console.log('correct');
+    inst.correct();
+  } else {
+    console.log('incorrect')
+    inst.incorrect();
+  }
+  gameQuestionLabel.innerText = inst.getCurrQuestion();
 }

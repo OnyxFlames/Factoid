@@ -11,8 +11,8 @@
         <div id="gameWrapper">
           <h3 id="gamecard">Things didn't load properly! :(</h3>
         </div>
-        <input type="button" id="truebutton" value="True" onclick="truebutton_onclick()">
-        <input type="button" id="falsebutton" value="False" onclick="falsebutton_onclick()">
+        <input type="button" id="truebutton" value="True" onclick="eval(true)">
+        <input type="button" id="falsebutton" value="False" onclick="eval(false)">
     </body>
     <script src="{{ url_for('static', filename='scripts/game.js') }}"></script>
 </html>
