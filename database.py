@@ -2,7 +2,11 @@
 
 import sqlite3
 
-DATABASE = 'database/datebase.db'
+DATABASEDIR = 'database/'
+
+DATABASEFILE = 'datebase.db'
+
+DATABASE = DATABASEDIR + DATABASEFILE
 
 from flask import *
 def get_db():
@@ -13,8 +17,8 @@ def get_db():
 
 import os
 def init_db_dir():
-    if (not os.path.exists("/database/")):
-        mkdir("database/")
+    if (not os.path.exists(DATABASEDIR)):
+        mkdir(DATABASEDIR)
 
     if(not os.path.isfile(DATABASE)):
         with app.app_context():
