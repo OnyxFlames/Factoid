@@ -13,7 +13,7 @@ import sqlite3
 import os
 # My stuff
 import auxlib
-
+import database
 
 app = Flask(__name__)
 
@@ -43,7 +43,7 @@ def play():
 #@app.route('/users/')
 @app.route('/users/<name>')
 def user(name=None):
-    res = get_db().execute("select * from USER where firstname = ?", [name])
+    res = database.get_db().execute("select * from USER where firstname = ?", [name])
     res = res.fetchone()[1] # Index one is the username
     if res:
         return render_template("user.html", name=res)
@@ -52,50 +52,23 @@ def user(name=None):
 
 @app.route('/signup-result/', methods=['POST', 'GET'])
 def signupreturn():
-    res = get_db().execute("select firstname from USER where firstname = ?", [request.form['name']])
+    res = database.get_db().execute("select firstname from USER where firstname = ?", [request.form['name']])
     # Re-type the result to be the name given by the user.
     res = res.fetchone()
     # If the user is already in the database
     if res:
         print("Returned existing: ", res)
         return "User already exists!"
-    #Otherwise add them, add their password, and thank them :)
+    # Otherwise add them, add their password, and thank them :)
     else:
         print("Creating new user: ", request.form['name'])
-        get_db().execute("insert into USER (firstname, password, isadmin) values (?, ?, 0)", [request.form['name'], request.form['password']])
-        get_db().commit()
+        database.get_db().execute("insert into USER (firstname, password, isadmin) values (?, ?, 0)", [request.form['name'], request.form['password']])
+        database.get_db().commit()
         return "Thank you for signing up!"
 
 @app.errorhandler(404)
 def pagenotfound(err):
     return render_template("not_found.html", phrase=auxlib.getRandomPhrase()), 404
-
-# Database stuff
-
-DATABASE = 'database/datebase.db'
-
-def get_db():
-    db = getattr(g, '_database', None)
-    if db is None:
-        db = g._database = sqlite3.connect(DATABASE)
-    return db
-
-@app.teardown_appcontext
-def close_connection(exception):
-    db = getattr(g, '_database', None)
-    if db is not None:
-        db.close()
-def init_db_dir():
-    if (not os.path.exists("/database/")):
-        os.mkdir("database/")
-
-    if(not os.path.isfile(DATABASE)):
-        with app.app_context():
-            script = open("sql/createtable.sql", "r")
-            get_db().executescript(script.read())
-            script.close()
-            print("Initial run. Database created at: ", DATABASE)
-
-init_db_dir()
+    
+database.init_db_dir()
 app.run()
-#app.run(host='0.0.0.0') Don't wanna make the server public right now.
