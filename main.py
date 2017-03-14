@@ -85,13 +85,17 @@ def close_connection(exception):
     db = getattr(g, '_database', None)
     if db is not None:
         db.close()
+def init_db_dir():
+    if (not os.path.exists("/database/")):
+        os.mkdir("database/")
 
-if(not os.path.isfile(DATABASE)):
-    with app.app_context():
-        script = open("sql/createtable.sql", "r")
-        get_db().executescript(script.read())
-        script.close()
-        print("Initial run. Database created at: ", DATABASE)
+    if(not os.path.isfile(DATABASE)):
+        with app.app_context():
+            script = open("sql/createtable.sql", "r")
+            get_db().executescript(script.read())
+            script.close()
+            print("Initial run. Database created at: ", DATABASE)
 
+init_db_dir()
 app.run()
 #app.run(host='0.0.0.0') Don't wanna make the server public right now.
