@@ -52,9 +52,9 @@ def user(name=None):
 
 @app.route('/signup-result/', methods=['POST', 'GET'])
 def signupreturn():
-    res = database.get_db().execute("select firstname from USER where firstname = ?", [request.form['name']])
+    res = database.get_db().execute("select * from USER where firstname = ?", [request.form['name']])
     # Re-type the result to be the name given by the user.
-    res = res.fetchone()
+    res = res.fetchone()[1]
     # If the user is already in the database
     if res:
         print("Returned existing: ", res)
@@ -69,6 +69,6 @@ def signupreturn():
 @app.errorhandler(404)
 def pagenotfound(err):
     return render_template("not_found.html", phrase=auxlib.getRandomPhrase()), 404
-    
+
 database.init_db_dir()
 app.run()
